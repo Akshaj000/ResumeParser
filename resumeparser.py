@@ -1,3 +1,4 @@
+from math import nan
 from pdfminer.high_level import extract_text
 import os
 import re
@@ -8,6 +9,7 @@ import locationtagger
 from nltk.corpus import wordnet
 import csv
 from spacy.matcher import PhraseMatcher
+import pprint
 
 
 nltk.downloader.download('maxent_ne_chunker')
@@ -152,6 +154,8 @@ for filename in os.listdir('files'):
         text = extract_text_from_docx("files/"+filename)
     elif filename.endswith('.pdf'):
         text = extract_text_from_pdf("files/"+filename)
+    else:
+        continue
 
     names = find_names(text)
     phone_number = extract_phone_number(text)
@@ -171,6 +175,11 @@ for filename in os.listdir('files'):
         "degree":degree,
     }
 
-    print(data)
+    pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
     #TODO to save it inside a csv file
+
+    ['Name', 'Email', 'PhoneNumber', 'Qualification',
+                    'Experience (Yes/No)', 'City','State', 'field of expirence']
+
+    csv_writer.writerow([data["name"], data["email"], data['ph'], nan, nan, data['city'], nan, nan])
