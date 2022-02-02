@@ -31,6 +31,8 @@ custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).readlines()
+statefile = "Assets/states.txt"
+statefile = open(statefile).readlines()
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -47,7 +49,7 @@ EMAIL_REG = re.compile(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
 csv_file = open('csv_data.csv', 'w', newline='')
 csv_writer = csv.writer(csv_file)
 csv_writer.writerow(['Name', 'Email', 'PhoneNumber', 'Qualification',
-                    'Experience (Yes/No)', 'City','State', 'field of expirence'])
+                    'Experience (Yes/No)', 'City', 'field of expirence'])
 
 
 def extract_text_from_pdf(pdf_path):
@@ -112,9 +114,34 @@ def extract_city(cv_data):
 
 
 def extract_state(text):
-    #TODO
-    return None
 
+    #TODO change it if u want
+    states =[]
+
+    text = (text.split(" "))
+    text2 = []
+    for words in text:
+        word = words.split("\n")
+        text2+=word
+    text+=text2
+    for words in text:
+        word = words.split(",")
+        text2+=word
+    text+=text2
+    
+
+        
+    for i in range(len(text)):
+        text[i] = text[i].strip()
+        for state in statefile:
+            state = state.strip()
+            if state.lower() == text[i].lower() and state != '':
+                states.append(state)
+
+    if states  == []:
+        return None
+    else:
+        return states[0]
 
 def extract_skills(text):
         skills = []
@@ -126,7 +153,6 @@ def extract_skills(text):
             skills.append(span.text)
         skills = list(set(skills))
         return skills
-        #TODO incomplete
 
 
 def get_degree(text):
@@ -149,7 +175,8 @@ def get_degree(text):
             deg = deg.strip()
             if deg == text[i] and deg not in degree and deg != '':
                 degree.append(deg)
-            
+    if degree == []:
+        return None
     return degree
 
 
@@ -166,10 +193,10 @@ for filename in os.listdir('files'):
     names = find_names(text)
     phone_number = extract_phone_number(text)
     emails = extract_emails(text)
-    state = extract_state(text)
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+    state = extract_state(text)
     highest_degree = find_highest_qualification(degree)
     if not highest_degree:
         highest_degree = degree
@@ -178,8 +205,8 @@ for filename in os.listdir('files'):
         "name": names[0]+" "+names[1],
         "ph" : phone_number,
         "email":emails,
-        "state":state,
         "city":city,
+        "state":state,
         "skills":skills,
         "degree":degree,
         "highest_degree": highest_degree
