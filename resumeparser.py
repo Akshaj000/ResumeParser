@@ -47,7 +47,7 @@ EMAIL_REG = re.compile(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
 csv_file = open('csv_data.csv', 'w', newline='')
 csv_writer = csv.writer(csv_file)
 csv_writer.writerow(['Name', 'Email', 'PhoneNumber', 'Qualification',
-                    'Experience (Yes/No)', 'City','State', 'field of expirence'])
+                    'Experience (Yes/No)', 'City', 'field of expirence'])
 
 
 def extract_text_from_pdf(pdf_path):
@@ -103,11 +103,6 @@ def extract_city(cv_data):
     return place
 
 
-def extract_state(text):
-    #TODO
-    return None
-
-
 def extract_skills(text):
         skills = []
         __nlp = nlp(text.lower())
@@ -158,7 +153,6 @@ for filename in os.listdir('files'):
     names = find_names(text)
     phone_number = extract_phone_number(text)
     emails = extract_emails(text)
-    state = extract_state(text)
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
@@ -167,7 +161,6 @@ for filename in os.listdir('files'):
         "name": names[0]+" "+names[1],
         "ph" : phone_number,
         "email":emails,
-        "state":state,
         "city":city,
         "skills":skills,
         "degree":degree,
@@ -175,9 +168,9 @@ for filename in os.listdir('files'):
 
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
-    #TODO to save it inside a csv file
+    # TODO to save it inside a csv file
 
-    ['Name', 'Email', 'PhoneNumber', 'Qualification',
-                    'Experience (Yes/No)', 'City','State', 'field of expirence']
+    # ['Name', 'Email', 'PhoneNumber', 'Qualification',
+    #                 'Experience (Yes/No)', 'City','State', 'field of expirence']
 
     csv_writer.writerow([data["name"], data["email"], data['ph'], nan, nan, data['city'], nan, nan])
