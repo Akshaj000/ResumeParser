@@ -31,6 +31,8 @@ custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).readlines()
+statefile = "Assets/states.txt"
+statefile = open(statefile).readlines()
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -104,8 +106,33 @@ def extract_city(cv_data):
 
 
 def extract_state(text):
-    #TODO
-    return None
+
+    states =[]
+
+    text = (text.split(" "))
+    text2 = []
+    for words in text:
+        word = words.split("\n")
+        text2+=word
+    text+=text2
+    for words in text:
+        word = words.split(",")
+        text2+=word
+    text+=text2
+    
+
+        
+    for i in range(len(text)):
+        text[i] = text[i].strip()
+        for state in statefile:
+            state = state.strip()
+            if state.lower() == text[i].lower() and state != '':
+                states.append(state)
+
+    if states  == []:
+        return None
+    else:
+        return states[0]
 
 
 def extract_skills(text):
@@ -118,7 +145,6 @@ def extract_skills(text):
             skills.append(span.text)
         skills = list(set(skills))
         return skills
-        #TODO incomplete
 
 
 def get_degree(text):
@@ -141,7 +167,8 @@ def get_degree(text):
             deg = deg.strip()
             if deg == text[i] and deg not in degree and deg != '':
                 degree.append(deg)
-            
+    if degree == []:
+        return None
     return degree
 
 
