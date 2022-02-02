@@ -26,12 +26,19 @@ nlp = spacy.load('en_core_web_sm')
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
+degreefile = "Assets/Degree.txt"
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
 skillsmatcher = PhraseMatcher(nlp.vocab)
 patterns = [nlp.make_doc(text) for text in skill if len(nlp.make_doc(text)) < 10]
 skillsmatcher.add("Job title", None, *patterns)
+
+Dfile = open(degreefile, "r", encoding='utf-8')    
+Degree = [line.strip().lower() for line in file]
+degreematcher = PhraseMatcher(nlp.vocab)
+patterns = [nlp.make_doc(text) for text in Degree if len(nlp.make_doc(text)) < 10]
+degreematcher.add("Job title", None, *patterns)
 
 
 #-----------------------------------------------------------
@@ -121,7 +128,20 @@ def get_degree(text):
     degree = []
 
     degree = [ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree']
-    return list(dict.fromkeys(degree).keys())
+    degree= list(dict.fromkeys(degree).keys())
+
+    __nlp = nlp(text.lower())
+    matches = degreematcher(__nlp)
+    for match_id, start, end in matches:
+        span = __nlp[start:end]
+        degree.append(span.text)
+    
+    degree2 = list(set(degree))
+    for i in degree2:
+        if i not in degree:
+            degree.append(i)
+    return degree
+
     #TODO incomplete
 
 
@@ -153,6 +173,4 @@ for filename in os.listdir('files'):
 
     print(data)
     print("----------------------------------------------------------------------------------------------")
-
     #TODO to save it inside a csv file
-    

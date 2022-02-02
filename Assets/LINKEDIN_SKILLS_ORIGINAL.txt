@@ -642,7 +642,7 @@ Academic Consulting
 Academic Databases
 Academic Development
 Academic Editing
-Academic English
+     
 Academic Journals
 Academic Libraries
 Academic Medical Centers
@@ -1427,7 +1427,7 @@ American Contractor
 American Cuisine
 American Culture
 American Dynamics
-American English
+American   
 American Express
 American Government
 American History
@@ -1744,7 +1744,7 @@ Appleworks
 Appliance Repairpip install docx2txt
 Appliances
 Applicant Tracking Systems
-Application
+  
 Application Architecture
 Application Configuration
 Application Delivery Controllers
@@ -2278,8 +2278,8 @@ Audio Typing
 Audio Visual Rental
 Audio Visual Support
 Audio Visual System Design
-Audio and Music
-Audio for Video
+   and Music
+   for Video
 Audio-Visual Production
 AudioVault
 Audiology
@@ -2800,8 +2800,6 @@ Bar Design
 Bar/Bat Mitzvahs
 Barbering
 Barclays Point
-Barcode
-Barcode Scanners
 Barcode Technology
 Bare Bones
 Bargaining
@@ -2980,7 +2978,6 @@ Benefits Management
 Benefits Negotiation
 Benefits Realisation
 Benetrac
-Bengali
 Benthic
 Bentley
 Bentley Systems
@@ -3209,10 +3206,10 @@ Bird Watching
 Birds
 Birkman
 Birkman Method
-Birth
-Birth Announcements
-Birth Certificates
-Birth Injury
+  
+   Announcements
+     
+   Injury
 Birthday Cakes
 Birthday Celebrations
 Birthday Parties
@@ -3614,7 +3611,7 @@ Brio Explorer
 Brio Query
 Brio Reports
 British
-British English
+British   
 British History
 British Literature
 British Politics
@@ -3869,7 +3866,7 @@ Business Economics
 Business Education
 Business Efficiency
 Business Engineering
-Business English
+Business   
 Business Entity Selection
 Business Ethics
 Business Expansion
@@ -4880,7 +4877,7 @@ Capture NX2
 Capture One
 Capture One Pro
 Capybara
-Car Audio
+Car   
 Car Loans
 Car Rental
 Car Repair
@@ -5228,8 +5225,6 @@ Certificate Authority
 Certificate Management
 Certificate Services
 Certificate of Need
-Certificates Of Insurance
-Certificates of Deposit
 Certification Development
 Certification Testing
 Certified Arborist
@@ -5565,7 +5560,7 @@ Chinese Painting
 Chinese Politics
 Chinese Teaching
 Chinese Translation
-Chinese to English
+Chinese to   
 Chip & PIN
 Chip Architecture
 Chipscope
@@ -7749,7 +7744,7 @@ Criminal Justice
 Criminal Law
 Criminal Procedure
 Criminal Profiling
-Criminal Records
+   Records
 Criminal Responsibility
 Criminology
 Crimping
@@ -9221,7 +9216,7 @@ Digicel Flipbook
 Digidesign
 Digidesign Control 24
 Digidesign Icon
-Digital
+  
 Digital Activation
 Digital Agency
 Digital Anarchy
@@ -9231,7 +9226,7 @@ Digital Archiving
 Digital Art
 Digital Asset Management
 Digital Assets
-Digital Audio
+Digital   
 Digital Audio Workstations
 Digital Billboards
 Digital Broadcast
@@ -10475,7 +10470,6 @@ Education Software
 Education Strategy
 Education and Instructional Design
 Education for Sustainability
-Education/Training
 Educational Administration
 Educational Assessment
 Educational Consulting
@@ -11042,9 +11036,6 @@ English Translation
 English as a Second Language (ESL)
 English for Specific Purposes
 English to Chinese
-English to French
-English to Japanese
-English to Spanish
 Engraving
 Enhanced Telecom Operations Map
 Enhancement Points
@@ -11495,7 +11486,7 @@ Event Videography
 Event-driven
 Eventbrite
 Eventing
-Events
+  
 Eventum
 Evernote
 Evernote for Mac
@@ -13271,7 +13262,7 @@ French Law
 French Literature
 French Polishing
 French Teaching
-French to English
+French to   
 Frequency Analysis
 Frequency Counter
 Frequency Synthesizers
@@ -13339,7 +13330,7 @@ Full life cycle experience
 Full-Charge Bookkeeping
 Full-life Cycle Recruiting
 Fullfillment
-Fully bilingual English
+Fully bilingual   
 Fume FX
 Fume Hoods
 Fumigation
@@ -13616,7 +13607,7 @@ Gambling
 Game AI
 Game Architecture
 Game Art
-Game Audio
+Game   
 Game Balance
 Game Business
 Game Day Operations
@@ -13933,7 +13924,7 @@ German Law
 German Literature
 German Teaching
 German Translation
-German to English
+German to   
 Geronimo
 Gerontology
 Gerrit
@@ -15336,7 +15327,7 @@ High-speed Digital Design
 High-volume Recruiting
 HighJump
 Highcharts
-Higher Education
+  
 Higher Education Accreditation
 Higher Education Administration
 Higher Education Leadership
@@ -15352,7 +15343,6 @@ Highways
 Hiker
 Hiking
 Hillman Curtis Artist Series
-Hindi
 Hinduism
 Hinges
 Hip
@@ -15410,7 +15400,7 @@ Hive
 Hlookups
 Hmong
 Hoardings
-Hobbies
+  
 Hobbit
 Hobby Farms
 Hochzeitsfotografie
@@ -16162,7 +16152,7 @@ ISTA
 ISTAR
 ISU
 ISV
-IT
+  
 IT & Business Strategy Alignment
 IT Asset Management
 IT Audit
@@ -17248,7 +17238,7 @@ International Traveler
 International Work
 International working
 Internationalization
-Internet
+  
 Internet Access
 Internet Backbone
 Internet Banking
@@ -17304,7 +17294,7 @@ Internet und Social Media
 Internet y redes sociales
 Internet/Intranet Technologies
 Internetworking
-Internships
+  
 Interop
 Interoperability
 Interpersonal Communication
@@ -17750,7 +17740,7 @@ Japanese History
 Japanese Language Proficiency Test
 Japanese Market
 Japanese Translation
-Japanese to English
+Japanese to   
 Jasmine
 Jasmine Framework
 Jasper
@@ -18463,7 +18453,7 @@ Language Services
 Language Teaching
 Language Technology
 Language Testing
-Languages
+  
 Lanyon
 Lao
 Lap Steel
@@ -19826,7 +19816,7 @@ Magnolia CMS
 Mahara
 Mahout
 Maid Service
-Mail
+  
 Mail Distribution
 Mail Merge
 Mail Order Pharmacy
@@ -21015,7 +21005,7 @@ Midas Plus
 Middle East Politics
 Middle Eastern Studies
 Middle Eastern history
-Middle English
+Middle   
 Middle Management
 Middle Market
 Middle Office
@@ -22989,7 +22979,7 @@ Offer Creation
 Offer Development
 Offers
 Offers in Compromise
-Office
+  
 Office & Industrial Moving
 Office + Productivity Software
 Office 365
@@ -23081,7 +23071,7 @@ Oil on Canvas
 Oilfield
 Oils
 Okuma
-Old English
+Old   
 Old School
 Older Homes
 Oldies
@@ -25267,7 +25257,7 @@ Placenta Encapsulation
 Places of Worship
 Placing Orders
 Plagiarism Detection
-Plain English
+Plain   
 Plain Language
 Plaintiff
 Plan Compliance
@@ -26227,7 +26217,7 @@ Process Validation
 Process Verification
 Process Writing
 Processes Development
-Processing
+  
 Processing Equipment
 Processors
 Procmail
@@ -26745,7 +26735,7 @@ Proteomics
 Proteus
 Proto.io
 Protobase
-Protocol
+  
 Protocol Analysis
 Protocol Analyzer
 Protocol Buffers
@@ -28741,7 +28731,7 @@ Russian History
 Russian Literature
 Russian Politics
 Russian Translation
-Russian to English
+Russian to   
 Rust
 Rx
 Rédaction
@@ -29728,7 +29718,6 @@ Second Mortgages
 Second Opinion
 Secondaries
 Secondary Data Analysis
-Secondary Education
 Secondary Market
 Secondary Mortgage Market
 Secondary Offerings
@@ -29864,7 +29853,6 @@ Self Directed IRA
 Self Directed Work Teams
 Self Expression
 Self Help
-Self Image
 Self Learning
 Self Managed Superannuation Funds (SMSF)
 Self Mastery
@@ -31641,7 +31629,7 @@ Statistics
 Statistiques web
 Statspack
 Statues
-Status
+  
 Status Tracking
 Statutes
 Statutory Accounting
@@ -32870,7 +32858,7 @@ Talk Show
 Talking Points
 Tally ERP
 Talpac
-Tamil
+ 
 Tandberg
 Tandem Himalaya
 Tango
@@ -33000,8 +32988,8 @@ Teacher Training
 Teaching
 Teaching Acting
 Teaching Classes
-Teaching English as a Foreign Language
-Teaching English as a Second Language
+Teaching    as a Foreign Language
+Teaching    as a Second Language
 Teaching Hospitals
 Teaching Reading
 Teaching Workshops
@@ -33145,7 +33133,6 @@ Technimo
 Techniques de photographie
 Techniques de studios
 Techniques photographiques
-Techno
 Techno-Commercial
 Techno-Commercial Negotiations
 Techno-Commercial Operations
@@ -33291,7 +33278,7 @@ Telligent Community Server
 Telmar
 Telnet
 Telon
-Telugu
+ 
 Temenos T24
 Temp-to-perm
 Tempera
@@ -34739,7 +34726,7 @@ Urban Studies
 Urbanism
 Urbanization
 Urchin
-Urdu
+ 
 Urea
 Urethane
 Urgency
@@ -35202,8 +35189,8 @@ Vicon
 Vicon Blade
 Victim Services
 Victorian literature
-Video
-Video & Audio
+  
+   & Audio
 Video Advertising
 Video Analytics
 Video Art
@@ -36547,7 +36534,7 @@ Workshop Leadership
 Workshop Moderation
 Workshop Presentation
 Workshopping
-Workshops
+  
 Worksoft Certify
 Workspace
 Workstation
