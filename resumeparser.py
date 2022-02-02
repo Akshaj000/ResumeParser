@@ -25,20 +25,16 @@ nlp = spacy.load('en_core_web_sm')
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
+
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
+degreefile = open(degreefile).readlines()
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
 skillsmatcher = PhraseMatcher(nlp.vocab)
 patterns = [nlp.make_doc(text) for text in skill if len(nlp.make_doc(text)) < 10]
 skillsmatcher.add("Job title", None, *patterns)
-
-Dfile = open(degreefile, "r", encoding='utf-8')    
-Degree = [line.strip().lower() for line in file]
-degreematcher = PhraseMatcher(nlp.vocab)
-patterns = [nlp.make_doc(text) for text in Degree if len(nlp.make_doc(text)) < 10]
-degreematcher.add("Job title", None, *patterns)
 
 
 #-----------------------------------------------------------
@@ -130,19 +126,21 @@ def get_degree(text):
     degree = [ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree']
     degree= list(dict.fromkeys(degree).keys())
 
-    __nlp = nlp(text.lower())
-    matches = degreematcher(__nlp)
-    for match_id, start, end in matches:
-        span = __nlp[start:end]
-        degree.append(span.text)
-    
-    degree2 = list(set(degree))
-    for i in degree2:
-        if i not in degree:
-            degree.append(i)
+    text = (text.split(" "))
+    text2 = []
+    for words in text:
+        word = words.split("\n")
+        text2+=word
+    text+=text2
+        
+    for i in range(len(text)):
+        text[i] = text[i].strip()
+        for deg in degreefile:
+            deg = deg.strip()
+            if deg == text[i] and deg not in degree and deg != '':
+                degree.append(deg)
+            
     return degree
-
-    #TODO incomplete
 
 
 data={}
