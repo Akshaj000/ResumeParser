@@ -21,7 +21,7 @@ nltk.download('stopwords')
 nltk.download('omw-1.4')
 
 
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_sm') 
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
@@ -61,19 +61,22 @@ def find_names(String):
     Sentences = nltk.sent_tokenize(String)
     Tokens = []
     for Sent in Sentences:
-        Tokens.append(nltk.word_tokenize(Sent))
+        Tokens.append(nltk.word_tokenize(Sent)) 
     Words_List = [nltk.pos_tag(Token) for Token in Tokens]
+
     Nouns_List = []
+
     for List in Words_List:
         for Word in List:
             if re.match('[NN.*]', Word[1]):
                 Nouns_List.append(Word[0])
+
     Names = []
     for Nouns in Nouns_List:
         if not wordnet.synsets(Nouns):
             Names.append(Nouns)
-    return Names
 
+    return Names
 
 def extract_phone_number(cv_data):
     phonenumber = PHONE_REG.search(cv_data)
@@ -81,13 +84,19 @@ def extract_phone_number(cv_data):
 
 
 def extract_emails(cv_data):
+    #return re.findall(EMAIL_REG, resume_text)
     email = EMAIL_REG.search(cv_data)
     return email.group()
 
 
 def extract_city(cv_data):
     place_entity = locationtagger.find_locations(text=cv_data)
-    return place_entity
+    try:
+        place = (place_entity.cities)[0]
+    except:
+        place = "Null"
+    return place
+
 
 def extract_state(text):
     #TODO
@@ -116,6 +125,7 @@ def get_degree(text):
     #TODO incomplete
 
 
+data={}
 text = ""
 for filename in os.listdir('files'):
     if filename.endswith('.docx'):
@@ -130,6 +140,19 @@ for filename in os.listdir('files'):
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+
+    data= {
+        "name": names[0]+" "+names[1],
+        "ph" : phone_number,
+        "email":emails,
+        "state":state,
+        "city":city,
+        "skills":skills,
+        "degree":degree,
+    }
+
+    print(data)
+    print("----------------------------------------------------------------------------------------------")
 
     #TODO to save it inside a csv file
     
