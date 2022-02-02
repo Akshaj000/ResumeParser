@@ -1,0 +1,7 @@
+docx2txt
+pdfminer.six
+nltk
+numpy
+requests
+spacy
+locationtagger
