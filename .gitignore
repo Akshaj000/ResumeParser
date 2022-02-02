@@ -414,4 +414,4 @@ pip-selfcheck.json
 # csv
 *.csv
 
-.myvenv/
+myvenv/

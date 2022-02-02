@@ -32,6 +32,8 @@ custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).readlines()
+statefile = "Assets/states.txt"
+statefile = open(statefile).readlines()
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -84,6 +86,14 @@ def find_names(String):
 
     return Names
 
+def find_highest_qualification(qualifications):
+    degrees = ['BSc', 'BCA', 'BTech', 'BE', 'B.E', 'MSc', 'MCA', 'MTech', 'Phd']
+    for deg in reversed(degrees):
+        for qual in qualifications:
+            if qual.lower().startswith(deg.lower()):
+                return qual
+
+
 def extract_phone_number(cv_data):
     phonenumber = PHONE_REG.search(cv_data)
     return phonenumber.group()
@@ -100,9 +110,34 @@ def extract_city(cv_data):
     try:
         place = (place_entity.cities)[0]
     except:
-        place = "Null"
+        place = None
     return place
 
+
+def extract_state(text):
+    #TODO change it if u want
+    states =[]
+
+    text = (text.split(" "))
+    text2 = []
+    for words in text:
+        word = words.split("\n")
+        text2+=word
+    text+=text2
+    for words in text:
+        word = words.split(",")
+        text2+=word
+    text+=text2
+    for i in range(len(text)):
+        text[i] = text[i].strip()
+        for state in statefile:
+            state = state.strip()
+            if state.lower() == text[i].lower() and state != '':
+                states.append(state)
+    if states  == []:
+        return None
+    else:
+        return states[0]
 
 def extract_skills(text):
         skills = []
@@ -114,7 +149,6 @@ def extract_skills(text):
             skills.append(span.text)
         skills = list(set(skills))
         return skills
-        #TODO incomplete
 
 
 def get_degree(text):
@@ -137,7 +171,8 @@ def get_degree(text):
             deg = deg.strip()
             if deg == text[i] and deg not in degree and deg != '':
                 degree.append(deg)
-            
+    if degree == []:
+        return None
     return degree
 
 def check_expirence(text):
@@ -168,6 +203,17 @@ for filename in os.listdir('files'):
     else:
         expirence = "No"
 
+    state = extract_state(text)
+    
+    if city != None and state!=None:
+        city = city+","+state
+    elif state != None:
+        city = state
+
+    highest_degree = find_highest_qualification(degree)
+    if not highest_degree:
+        highest_degree = degree
+        
     data= {
         "name": names[0]+" "+names[1],
         "ph" : phone_number,
@@ -176,6 +222,7 @@ for filename in os.listdir('files'):
         "skills":skills,
         "degree":degree,
         "expirence":expirence,
+        "highest_degree": highest_degree
     }
     exp = ""
     for i in skills:
@@ -185,9 +232,5 @@ for filename in os.listdir('files'):
         deg = deg + i + ", "
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
-    # TODO to save it inside a csv file
 
-    # ['Name', 'Email', 'PhoneNumber', 'Qualification',
-    #                 'Experience (Yes/No)', 'City','State', 'field of expirence']
-
-    csv_writer.writerow([data["name"], data["email"], data['ph'], deg, expirence, data['city'], exp])
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
