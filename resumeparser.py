@@ -83,6 +83,14 @@ def find_names(String):
 
     return Names
 
+def find_highest_qualification(qualifications):
+    degrees = ['BSc', 'BCA', 'BTech', 'BE', 'B.E', 'MSc', 'MCA', 'MTech', 'Phd']
+    for deg in reversed(degrees):
+        for qual in qualifications:
+            if qual.lower().startswith(deg.lower()):
+                return qual
+
+
 def extract_phone_number(cv_data):
     phonenumber = PHONE_REG.search(cv_data)
     return phonenumber.group()
@@ -162,6 +170,9 @@ for filename in os.listdir('files'):
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+    highest_degree = find_highest_qualification(degree)
+    if not highest_degree:
+        highest_degree = degree
 
     data= {
         "name": names[0]+" "+names[1],
@@ -171,13 +182,10 @@ for filename in os.listdir('files'):
         "city":city,
         "skills":skills,
         "degree":degree,
+        "highest_degree": highest_degree
     }
 
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
-    #TODO to save it inside a csv file
 
-    ['Name', 'Email', 'PhoneNumber', 'Qualification',
-                    'Experience (Yes/No)', 'City','State', 'field of expirence']
-
-    csv_writer.writerow([data["name"], data["email"], data['ph'], nan, nan, data['city'], nan, nan])
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], nan, data['city'], nan, nan])
