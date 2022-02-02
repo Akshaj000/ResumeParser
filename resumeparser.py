@@ -12,6 +12,7 @@ from spacy.matcher import PhraseMatcher
 import pprint
 
 
+
 nltk.downloader.download('maxent_ne_chunker')
 nltk.downloader.download('words')
 nltk.downloader.download('treebank')
@@ -174,6 +175,11 @@ def get_degree(text):
         return None
     return degree
 
+def check_expirence(text):
+    if "Experience" in text or "EXPERIENCE" in text:
+        return True
+    else:
+        return False
 
 data={}
 text = ""
@@ -191,6 +197,12 @@ for filename in os.listdir('files'):
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+
+    if check_expirence(text):
+        expirence = "Yes"
+    else:
+        expirence = "No"
+
     state = extract_state(text)
     
     if city != None and state!=None:
@@ -209,10 +221,16 @@ for filename in os.listdir('files'):
         "city":city,
         "skills":skills,
         "degree":degree,
+        "expirence":expirence,
         "highest_degree": highest_degree
     }
-
+    exp = ""
+    for i in skills:
+        exp = exp + i + ", "
+    deg = ""
+    for i in degree:
+        deg = deg + i + ", "
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
 
-    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], nan, data['city'], nan, nan])
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
