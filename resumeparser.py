@@ -84,18 +84,23 @@ def find_highest_qualification(qualifications):
 
 def extract_phone_number(cv_data):
     phonenumber = PHONE_REG.search(cv_data)
-    return phonenumber.group()
-
+    try:
+        return phonenumber.group()
+    except:
+        return None
 
 def extract_emails(cv_data):
     #return re.findall(EMAIL_REG, resume_text)
     email = EMAIL_REG.search(cv_data)
-    return email.group()
+    try:
+        return email.group()
+    except:
+        return None
 
 
 def extract_city(cv_data):
-    place_entity = locationtagger.find_locations(text=cv_data)
     try:
+        place_entity = locationtagger.find_locations(text=cv_data)
         place = (place_entity.cities)[0]
     except:
         place = None
@@ -177,6 +182,9 @@ for filename in os.listdir('files'):
         text = extract_text_from_docx("files/"+filename)
     elif filename.endswith('.pdf'):
         text = extract_text_from_pdf("files/"+filename)
+        if text == "":
+            print(f"Couldn't extract text from {filename}")
+            continue
     else:
         continue
 
@@ -205,9 +213,17 @@ for filename in os.listdir('files'):
             highest_degree = degree
     else:
         highest_degree = None
+    
+    if names != []:
+        try :
+            name = names[0]+" "+names[1]
+        except:
+            name = names[0]
+    else:
+        name = nan
         
     data= {
-        "name": names[0]+" "+names[1],
+        "name": name,
         "ph" : phone_number,
         "email":emails,
         "city":city,
