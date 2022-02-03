@@ -778,9 +778,6 @@ Acoustic Emission
 Acoustic Guitar
 Acoustic Measurement
 Acoustic Modeling
-Acoustical
-Acoustical Ceilings
-Acoustics
 Acquia
 Acquired Brain Injury
 Acquisition Assessment
@@ -3206,10 +3203,6 @@ Bird Watching
 Birds
 Birkman
 Birkman Method
-  
-   Announcements
-     
-   Injury
 Birthday Cakes
 Birthday Celebrations
 Birthday Parties
@@ -9871,11 +9864,6 @@ Drug Repositioning
 Drug Resistance
 Drug Stores
 Drug Testing
-Drum Set
-Drums
-Drupal
-Drupal Commerce
-Drupal Gardens
 Drush
 Dry Etch
 Dry Eye
@@ -21178,7 +21166,6 @@ MoCA
 MoR
 MoSes
 Mobi
-Mobile
 Mobile 2.0
 Mobile Advertising
 Mobile Analytics

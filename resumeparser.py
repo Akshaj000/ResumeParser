@@ -11,6 +11,7 @@ import csv
 from spacy.matcher import PhraseMatcher
 import pprint
 
+
 nlp = spacy.load('en_core_web_sm') 
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
@@ -97,12 +98,11 @@ def extract_city(cv_data):
     try:
         place = (place_entity.cities)[0]
     except:
-        place = "Null"
+        place = None
     return place
 
 
 def extract_state(text):
-
     #TODO change it if u want
     states =[]
 
@@ -116,16 +116,12 @@ def extract_state(text):
         word = words.split(",")
         text2+=word
     text+=text2
-    
-
-        
     for i in range(len(text)):
         text[i] = text[i].strip()
         for state in statefile:
             state = state.strip()
             if state.lower() == text[i].lower() and state != '':
                 states.append(state)
-
     if states  == []:
         return None
     else:
@@ -167,6 +163,11 @@ def get_degree(text):
         return None
     return degree
 
+def check_expirence(text):
+    if "Experience" in text or "EXPERIENCE" in text:
+        return True
+    else:
+        return False
 
 data={}
 text = ""
@@ -184,23 +185,41 @@ for filename in os.listdir('files'):
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+
+    if check_expirence(text):
+        expirence = "Yes"
+    else:
+        expirence = "No"
+
     state = extract_state(text)
+    
+    if city != None and state!=None:
+        city = city+","+state
+    elif state != None:
+        city = state
+
     highest_degree = find_highest_qualification(degree)
     if not highest_degree:
         highest_degree = degree
-
+        
     data= {
         "name": names[0]+" "+names[1],
         "ph" : phone_number,
         "email":emails,
         "city":city,
-        "state":state,
         "skills":skills,
         "degree":degree,
+        "expirence":expirence,
         "highest_degree": highest_degree
     }
-
+    exp = ""
+    for i in skills:
+        exp = exp + i + ", "
+    deg = ""
+    for i in degree:
+        deg = deg + i + ", "
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
 
-    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], nan, data['city'], nan])
+
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
