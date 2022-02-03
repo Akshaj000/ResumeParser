@@ -12,18 +12,6 @@ from spacy.matcher import PhraseMatcher
 import pprint
 
 
-
-nltk.downloader.download('maxent_ne_chunker')
-nltk.downloader.download('words')
-nltk.downloader.download('treebank')
-nltk.downloader.download('maxent_treebank_pos_tagger')
-nltk.downloader.download('punkt')
-nltk.download('averaged_perceptron_tagger')
-nltk.download('wordnet')
-nltk.download('stopwords')
-nltk.download('omw-1.4')
-
-
 nlp = spacy.load('en_core_web_sm') 
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
@@ -232,5 +220,6 @@ for filename in os.listdir('files'):
         deg = deg + i + ", "
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
+
 
     csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
