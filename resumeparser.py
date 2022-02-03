@@ -146,13 +146,13 @@ def get_degree(text):
     degree = [ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree']
     degree= list(dict.fromkeys(degree).keys())
 
+    #TODO change this method if theres a btr way
     text = (text.split(" "))
     text2 = []
     for words in text:
         word = words.split("\n")
         text2+=word
     text+=text2
-        
     for i in range(len(text)):
         text[i] = text[i].strip()
         for deg in degreefile:
@@ -162,6 +162,7 @@ def get_degree(text):
     if degree == []:
         return None
     return degree
+
 
 def check_expirence(text):
     if "Experience" in text or "EXPERIENCE" in text:
@@ -198,9 +199,12 @@ for filename in os.listdir('files'):
     elif state != None:
         city = state
 
-    highest_degree = find_highest_qualification(degree)
-    if not highest_degree:
-        highest_degree = degree
+    if degree != None:
+        highest_degree = find_highest_qualification(degree)
+        if not highest_degree:
+            highest_degree = degree
+    else:
+        highest_degree = None
         
     data= {
         "name": names[0]+" "+names[1],
@@ -212,12 +216,21 @@ for filename in os.listdir('files'):
         "expirence":expirence,
         "highest_degree": highest_degree
     }
+
     exp = ""
-    for i in skills:
-        exp = exp + i + ", "
+    if skills != None:
+        for i in skills:
+            exp = exp + i + ", "
+    else:
+        exp = None
+
     deg = ""
-    for i in degree:
-        deg = deg + i + ", "
+    if degree != None:
+        for i in degree:
+            deg = deg + i + ", "
+    else:
+        deg = None
+
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
 

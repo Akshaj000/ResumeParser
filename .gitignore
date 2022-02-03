@@ -415,3 +415,4 @@ pip-selfcheck.json
 *.csv
 
 myvenv/
+files/

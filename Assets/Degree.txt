@@ -354,6 +354,8 @@ B.S
 Bachelor of Technology 	
 BTech
 B.Tech
+B Tech
+B. Tech
 Bachelor of Veterinary Science 	
 B.V.Sc
 Bachelor of Visual Arts 	
