@@ -22,6 +22,12 @@ degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).readlines()
 statefile = "Assets/states.txt"
 statefile = open(statefile).readlines()
+cityfile = "Assets/cities-states.csv"
+csvreaderplace = csv.reader(file)
+places = []
+for row in csvreaderplace:
+    places.append(row)
+
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -99,6 +105,7 @@ def extract_emails(cv_data):
 
 
 def extract_city(cv_data):
+    
     try:
         place_entity = locationtagger.find_locations(text=cv_data)
         place = (place_entity.cities)[0]
