@@ -19,7 +19,7 @@ custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
-degreefile = open(degreefile).readlines()
+degreefile = open(degreefile).read().splitlines()
 statefile = "Assets/states.txt"
 statefile = open(statefile).readlines()
 cityfile = "Assets/cities-states.csv"
@@ -81,11 +81,12 @@ def find_names(String):
     return Names
 
 def find_highest_qualification(qualifications):
-    degrees = ['BSc', 'BCA', 'BTech', 'BE', 'B.E', 'MSc', 'MCA', 'MTech', 'Phd']
-    for deg in reversed(degrees):
+    for deg in degreefile:
         for qual in qualifications:
-            if qual.lower().startswith(deg.lower()):
+            if qual.startswith(deg):
                 return qual
+    
+    return ' '.join(qualifications)
 
 
 def extract_phone_number(cv_data):
@@ -153,26 +154,21 @@ def extract_skills(text):
 
 def get_degree(text):
     doc = custom_nlp2(text)
-    degree = []
 
-    degree = [ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree']
-    degree= list(dict.fromkeys(degree).keys())
+    degree = (ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree')
+    degree= set(dict.fromkeys(degree).keys())
 
-    #TODO change this method if theres a btr way
-    text = (text.split(" "))
-    text2 = []
-    for words in text:
-        word = words.split("\n")
-        text2+=word
-    text+=text2
+    text = text.split("\n")
+
     for i in range(len(text)):
         text[i] = text[i].strip()
         for deg in degreefile:
-            deg = deg.strip()
-            if deg == text[i] and deg not in degree and deg != '':
-                degree.append(deg)
-    if degree == []:
+            if deg in text[i] and deg != '':
+                degree.add(deg)
+
+    if not degree:
         return None
+
     return degree
 
 
@@ -194,14 +190,13 @@ for filename in os.listdir('files'):
             continue
     else:
         continue
-
+    
     names = find_names(text)
     phone_number = extract_phone_number(text)
     emails = extract_emails(text)
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
-
     if check_expirence(text):
         expirence = "Yes"
     else:
@@ -219,8 +214,7 @@ for filename in os.listdir('files'):
         if not highest_degree:
             highest_degree = degree
     else:
-        highest_degree = None
-    
+        highest_degree = nan
     if names != []:
         try :
             name = names[0]+" "+names[1]
@@ -257,5 +251,4 @@ for filename in os.listdir('files'):
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
 
-
-    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data["highest_degree"] , expirence, data['city'], exp])
