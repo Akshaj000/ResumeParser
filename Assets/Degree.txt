@@ -106,7 +106,6 @@ Master of Theology
 Master of Theological Studies 
 Master of Urban Planning
 Master of Veterinary Science 
-
 Bachelor of Technology 	
 BTech
 B.Tech
@@ -202,7 +201,6 @@ B.S
 BSc
 Bsc
 B.Sc
-BA
 BSC.CS
 B.A 
 B.Arts
