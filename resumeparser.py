@@ -16,7 +16,7 @@ nlp = spacy.load('en_core_web_sm')
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
-city_state_file = open("Assets/india_cities_states_feb_2015.csv", "r")
+city_state_file = open("Assets/cities_states.csv", "r")
 
 reader = csv.reader(city_state_file)
 cities = []
