@@ -208,21 +208,37 @@ for filename in os.listdir('files'):
         city = city+","+state
     elif state != None:
         city = state
-
+    else:
+        if state == None and city == None:
+            city = ''
+    if skills == []:
+        skills = ''
     if degree != None:
         highest_degree = find_highest_qualification(degree)
         if not highest_degree:
             highest_degree = degree
     else:
-        highest_degree = nan
+        highest_degree = ''
+
+    n = []
+    not_char = re.compile('[^0-9a-zA-Z]+')
+    for name in names:
+        if not any(map(str.isdigit, name)) and not (not_char.search(name)) and name[0].isupper():
+            if name.lower() not in skills and name not in city:
+                n.append(name)
+
+    names = n
     if names != []:
         try :
             name = names[0]+" "+names[1]
         except:
             name = names[0]
     else:
-        name = nan
+        name = ''
         
+
+    print(n) 
+
     data= {
         "name": name,
         "ph" : phone_number,
