@@ -5,29 +5,31 @@ import re
 import docx2txt
 import nltk
 import spacy
-import locationtagger
 from nltk.corpus import wordnet
 import csv
 from spacy.matcher import PhraseMatcher
 import pprint
+from flashtext import KeywordProcessor
 
 
 nlp = spacy.load('en_core_web_sm') 
 
 custom_nlp2 = spacy.load(os.path.join("Assets","degree","model"))
 
+city_state_file = open("Assets/cities_states.csv", "r")
+
+reader = csv.reader(city_state_file)
+cities = []
+states = ['Andhra Pradesh', 'Arunachal Pradesh ', 'Assam', 'Bihar', 'Chhattisgarh', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir ', 'Jharkhand', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha',
+          'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal', 'Andaman and Nicobar Islands', 'Chandigarh', 'Dadra and Nagar Haveli', 'Daman and Diu', 'Lakshadweep', 'National Capital Territory of Delhi', 'Puducherry']
+for row in reader:
+    cities.append(row[0])
 
 file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
 degreefile = "Assets/Degree.txt"
-degreefile = open(degreefile).read().splitlines()
+degreefile = open(degreefile).readlines()
 statefile = "Assets/states.txt"
 statefile = open(statefile).readlines()
-cityfile = "Assets/cities-states.csv"
-csvreaderplace = csv.reader(file)
-places = []
-for row in csvreaderplace:
-    places.append(row)
-
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -38,7 +40,7 @@ skillsmatcher.add("Job title", None, *patterns)
 
 #-----------------------------------------------------------
 
-PHONE_REG = re.compile(r'[\+\(]?[1-9][0-9 .\-\(\)]{8,}[0-9]')
+PHONE_REG = re.compile(r'[\+\(]?[1-9][0-9 .\(\)]{8,}[0-9]')
 EMAIL_REG = re.compile(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
 
 csv_file = open('csv_data.csv', 'w', newline='')
@@ -81,12 +83,11 @@ def find_names(String):
     return Names
 
 def find_highest_qualification(qualifications):
-    for deg in degreefile:
+    degrees = ['BSc', 'BCA', 'BTech', 'BE', 'B.E', 'MSc', 'MCA', 'MTech', 'Phd']
+    for deg in reversed(degrees):
         for qual in qualifications:
-            if qual.startswith(deg):
+            if qual.lower().startswith(deg.lower()):
                 return qual
-    
-    return ' '.join(qualifications)
 
 
 def extract_phone_number(cv_data):
@@ -106,39 +107,20 @@ def extract_emails(cv_data):
 
 
 def extract_city(cv_data):
-    
-    try:
-        place_entity = locationtagger.find_locations(text=cv_data)
-        place = (place_entity.cities)[0]
-    except:
-        place = None
-    return place
-
-
-def extract_state(text):
-    #TODO change it if u want
-    states =[]
-
-    text = (text.split(" "))
-    text2 = []
-    for words in text:
-        word = words.split("\n")
-        text2+=word
-    text+=text2
-    for words in text:
-        word = words.split(",")
-        text2+=word
-    text+=text2
-    for i in range(len(text)):
-        text[i] = text[i].strip()
-        for state in statefile:
-            state = state.strip()
-            if state.lower() == text[i].lower() and state != '':
-                states.append(state)
-    if states  == []:
-        return None
+    processor1 = KeywordProcessor(case_sensitive=True)
+    processor1.add_keywords_from_list(cities)
+    city = processor1.extract_keywords(cv_data, span_info=True)
+    processor2 = KeywordProcessor(case_sensitive=True)
+    processor2.add_keywords_from_list(states)
+    state = processor2.extract_keywords(cv_data, span_info=True)
+    if city != [] and state != [] :
+        return city[0][0] + " " + state[0][0]
+    elif city != []:
+        return city[0][0]
+    elif state != [] :
+        return state[0][0]
     else:
-        return states[0]
+        return ""
 
 def extract_skills(text):
         skills = []
@@ -154,21 +136,26 @@ def extract_skills(text):
 
 def get_degree(text):
     doc = custom_nlp2(text)
+    degree = []
 
-    degree = (ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree')
-    degree= set(dict.fromkeys(degree).keys())
+    degree = [ent.text.replace("\n", " ") for ent in list(doc.ents) if ent.label_ == 'Degree']
+    degree= list(dict.fromkeys(degree).keys())
 
-    text = text.split("\n")
-
+    #TODO change this method if theres a btr way
+    text = (text.split(" "))
+    text2 = []
+    for words in text:
+        word = words.split("\n")
+        text2+=word
+    text+=text2
     for i in range(len(text)):
         text[i] = text[i].strip()
         for deg in degreefile:
-            if deg in text[i] and deg != '':
-                degree.add(deg)
-
-    if not degree:
+            deg = deg.strip()
+            if deg == text[i] and deg not in degree and deg != '':
+                degree.append(deg)
+    if degree == []:
         return None
-
     return degree
 
 
@@ -190,27 +177,20 @@ for filename in os.listdir('files'):
             continue
     else:
         continue
-    
+
     names = find_names(text)
     phone_number = extract_phone_number(text)
     emails = extract_emails(text)
     city = extract_city(text)
     skills = extract_skills(text)
     degree = get_degree(text)
+
     if check_expirence(text):
         expirence = "Yes"
     else:
         expirence = "No"
 
-    state = extract_state(text)
-    
-    if city != None and state!=None:
-        city = city+","+state
-    elif state != None:
-        city = state
-    else:
-        if state == None and city == None:
-            city = ''
+    # state = extract_state(text)
     if skills == []:
         skills = ''
     if degree != None:
@@ -235,9 +215,6 @@ for filename in os.listdir('files'):
             name = names[0]
     else:
         name = ''
-        
-
-    print(n) 
 
     data= {
         "name": name,
@@ -267,4 +244,5 @@ for filename in os.listdir('files'):
     pprint.pprint(data)
     print("----------------------------------------------------------------------------------------------")
 
-    csv_writer.writerow([data["name"], data["email"], data['ph'], data["highest_degree"] , expirence, data['city'], exp])
+
+    csv_writer.writerow([data["name"], data["email"], data['ph'], data['highest_degree'], expirence, data['city'], exp])
