@@ -215,9 +215,6 @@ for filename in os.listdir('files'):
             name = names[0]
     else:
         name = ''
-        
-
-    print(n) 
 
     data= {
         "name": name,
