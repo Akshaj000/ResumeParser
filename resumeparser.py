@@ -120,33 +120,7 @@ def extract_city(cv_data):
     elif state != [] :
         return state[0][0]
     else:
-        return None
-
-
-def extract_state(text):
-    #TODO change it if u want
-    states =[]
-
-    text = (text.split(" "))
-    text2 = []
-    for words in text:
-        word = words.split("\n")
-        text2+=word
-    text+=text2
-    for words in text:
-        word = words.split(",")
-        text2+=word
-    text+=text2
-    for i in range(len(text)):
-        text[i] = text[i].strip()
-        for state in statefile:
-            state = state.strip()
-            if state.lower() == text[i].lower() and state != '':
-                states.append(state)
-    if states  == []:
-        return None
-    else:
-        return states[0]
+        return ""
 
 def extract_skills(text):
         skills = []
@@ -217,27 +191,34 @@ for filename in os.listdir('files'):
         expirence = "No"
 
     # state = extract_state(text)
-    
-    # if city != None and state!=None:
-    #     city = city+","+state
-    # elif state != None:
-    #     city = state
-
+    if skills == []:
+        skills = ''
     if degree != None:
         highest_degree = find_highest_qualification(degree)
         if not highest_degree:
             highest_degree = degree
     else:
-        highest_degree = None
-    
+        highest_degree = ''
+
+    n = []
+    not_char = re.compile('[^0-9a-zA-Z]+')
+    for name in names:
+        if not any(map(str.isdigit, name)) and not (not_char.search(name)) and name[0].isupper():
+            if name.lower() not in skills and name not in city:
+                n.append(name)
+
+    names = n
     if names != []:
         try :
             name = names[0]+" "+names[1]
         except:
             name = names[0]
     else:
-        name = nan
+        name = ''
         
+
+    print(n) 
+
     data= {
         "name": name,
         "ph" : phone_number,
