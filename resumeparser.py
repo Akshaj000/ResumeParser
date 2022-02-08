@@ -25,7 +25,7 @@ states = ['Andhra Pradesh', 'Arunachal Pradesh ', 'Assam', 'Bihar', 'Chhattisgar
 for row in reader:
     cities.append(row[0])
 
-file = "Assets/LINKEDIN_SKILLS_ORIGINAL.txt"
+file = "Assets/Skills.txt"
 degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).readlines()
 statefile = "Assets/states.txt"
