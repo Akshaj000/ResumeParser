@@ -1,5 +1,5 @@
 MBA
-MAster of Technology 	
+Master of Technology 	
 MTech
 M.Tech
 M Tech
@@ -290,7 +290,6 @@ Bachelor of Philosophy
 B.Ph
 Bachelor of Policing 	
 B.Pol
-
 Bachelor of Science in Nursing 	
 BSN
 Bachelor of Socio-Legal Studies 	
