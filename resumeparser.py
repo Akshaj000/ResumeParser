@@ -28,8 +28,7 @@ for row in reader:
 file = "Assets/Skills.txt"
 degreefile = "Assets/Degree.txt"
 degreefile = open(degreefile).read().splitlines()
-statefile = "Assets/states.txt"
-statefile = open(statefile).readlines()
+
 
 file = open(file, "r", encoding='utf-8')    
 skill = [line.strip().lower() for line in file]
@@ -89,8 +88,6 @@ def find_highest_qualification(qualifications):
                 return qual
     
     return ' '.join(qualifications)
-
-
 
 def extract_phone_number(cv_data):
     phonenumber = PHONE_REG.search(cv_data)
@@ -174,7 +171,7 @@ for filename in os.listdir('files'):
             continue
     else:
         continue
-
+    
     names = find_names(text)
     phone_number = extract_phone_number(text)
     emails = extract_emails(text)

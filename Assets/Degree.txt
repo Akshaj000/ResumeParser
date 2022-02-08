@@ -26,7 +26,8 @@ Master of City Planning
 Master of Chemistry 
 Master of Commerce 
 Master of Computational Finance 
-Master of Computer Applications 
+Master of Computer Applications
+Master of Computer Application
 Master in Creative Technologies
 Master of Criminal Justice 
 Master of Design 
