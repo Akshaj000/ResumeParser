@@ -43,7 +43,7 @@ EMAIL_REG = re.compile(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
 
 csv_file = open('csv_data.csv', 'w', newline='')
 csv_writer = csv.writer(csv_file)
-csv_writer.writerow(['Name', 'Email', 'PhoneNumber', 'Qualification',
+csv_writer.writerow(['Name', 'Email', 'PhoneNumber', 'Highest Qualification',
                     'Experience (Yes/No)', 'City', 'field of expirence'])
 
 
